@@ -1,0 +1,47 @@
+﻿@page "/paulo"
+
+@using Blazor.Data
+<h1>Primeira grid com Blazor</h1>
+
+@if (dtoObjeto == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var livro in dtoObjeto)
+            {
+                <tr>
+                    <td>@livro.id</td>
+                    <td>@livro.title</td>
+                    <td>@livro.body</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    Livros livros = new Livros();
+    public List<DtoObjetoExemplo> dtoObjeto = new List<DtoObjetoExemplo>();
+
+    public void ConsultarLivros()
+    {
+        dtoObjeto = livros.PegarRetornoDaAPI();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ConsultarLivros();
+    }
+}
