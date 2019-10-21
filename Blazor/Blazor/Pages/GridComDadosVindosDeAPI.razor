@@ -1,7 +1,8 @@
 ﻿@page "/paulo"
+@inject NavigationManager NavigationManager
 
 @using Blazor.Data
-<h1>Primeira grid com Blazor</h1>
+<h1>Dados da tabela vieram de API REST</h1>
 
 @if (dtoObjeto == null)
 {
@@ -28,6 +29,13 @@ else
             }
         </tbody>
     </table>
+
+    <br />
+
+    <button class="btn btn-primary" @onclick="AcaoDoBotaoEmCSharp">Voltar para o início</button>
+
+    <br />
+    <br />
 }
 
 @code {
@@ -43,5 +51,10 @@ else
     protected override async Task OnInitializedAsync()
     {
         ConsultarLivros();
+    }
+
+    public void AcaoDoBotaoEmCSharp()
+    {
+        NavigationManager.NavigateTo("inicio");
     }
 }
